@@ -3750,6 +3750,7 @@ Alert!!! : ${res.desc}`))
                     textImg(ind.menuText(prefix))
                     break
                 case prefix+'menupremi':
+                if (!isPremium) return reply(mess.OnlyPrem)
                     textImg(ind.menuPremi(prefix))
                     break
                 case prefix+'stickermenu':
