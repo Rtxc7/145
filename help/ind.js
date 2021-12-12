@@ -884,7 +884,7 @@ usage: *${prefix}artimimpi text*
 usage: *${prefix}pasangan text*
 
 4. ${prefix}ramaljadian
-usage: *-*
+usage: *${prefix}ramaljadian hari|bulan|tahun*
     `
 }
 
@@ -916,7 +916,7 @@ usage: *${prefix}quranaudio query*
 8. ${prefix}listsurah
 usage: *-*
 
-9. ${prefix}randomquran*
+9. ${prefix}randomquran
 usage: *-*
     `
 }
