@@ -69,6 +69,8 @@ let ban = JSON.parse(fs.readFileSync('./database/ban.json'));
 let antilink = JSON.parse(fs.readFileSync('./database/antilink.json'));
 let autosticker = JSON.parse(fs.readFileSync('./database/autosticker.json'));
 let nsfw = JSON.parse(fs.readFileSync('./database/nsfw.json'));
+let antichatwa = JSON.parse(fs.readFileSync('./database/antiwame.json'));
+let antilinkyoutube = JSON.parse(fs.readFileSync('./database/antiyoutube.json'));
 let antivirtex = JSON.parse(fs.readFileSync('./database/antivirtex.json'));
 let antiviewonce = JSON.parse(fs.readFileSync('./database/antiviewonce.json'));
 let badword = JSON.parse(fs.readFileSync('./database/badword.json'));
@@ -256,6 +258,8 @@ module.exports = async(xinz, msg, smsg, blocked, _afk, welcome) => {
         const isBlocked = blocked.includes(sender)
         const isAfkOn = afk.checkAfkUser(sender, _afk)
         const isAntiLink = isGroup ? antilink.includes(from) : false
+        const isAntiYoutube = isGroup ? antilinkyoutube.includes(from) : false
+        const isAntiWhatsappPrivate = isGroup ? antichatwa.includes(from) : false
         const isAntiVO = isGroup ? antiviewonce.includes(from) : false
         const isAntiVirtex = isGroup ? antivirtex.includes(from) : false
         const isWelcome = isGroup ? welcome.includes(from) : false
@@ -371,6 +375,20 @@ module.exports = async(xinz, msg, smsg, blocked, _afk, welcome) => {
         if (isGroup && isAntiLink && !isOwner && !isGroupAdmins && isBotGroupAdmins){
             if (chats.match(/(https:\/\/chat.whatsapp.com)/gi)) {
                 reply(`*「 GROUP LINK DETECTOR 」*\n\nSepertinya kamu mengirimkan link grup, maaf kamu akan di kick`)
+                xinz.groupRemove(from, [sender])
+            }
+        }
+        // Anti Link Youtube
+        if (isGroup && isAntiYoutube && !isOwner && !isGroupAdmins && isBotGroupAdmins){
+            if (chats.match(/(https:\/\/youtu)/gi)) {
+                reply(`*「 YOUTUBE LINK DETECTOR 」*\n\nSepertinya kamu mengirimkan link youtube, maaf kamu akan di kick`)
+                xinz.groupRemove(from, [sender])
+            }
+        }
+        // Anti Link Private Chat
+        if (isGroup && isAntiWhatsappPrivate && !isOwner && !isGroupAdmins && isBotGroupAdmins){
+            if (chats.match(/(https:\/\/wa.me\/)/gi)) {
+                reply(`*「 PRIVATE  CHAT DETECTOR 」*\n\nSepertinya kamu mengirimkan link private chat, maaf kamu akan di kick`)
                 xinz.groupRemove(from, [sender])
             }
         }
@@ -4667,7 +4685,7 @@ _Harap tunggu sebentar, media akan segera dikirim_`
                 case prefix+'slot':
                     if (isGroup && !isLevelingOn) return reply(ind.levelingNotOn())
                 if (isGame(sender, isOwner, gcount, glimit)) return reply(`Limit game kamu sudah habis`)
-                    const sotoy = ['🍊 : 🍒 : 🍐','🍒 : 🔔 : 🍊','🍇 : 🍒 : 🍐','🍊 : 🍋 : 🔔','🔔 : 🍒 : 🍐','🔔 : 🍒 : 🍊','🍊 : 🍋 : 🔔','🍐 : 🍒 : 🍋','🍐 : 🍐 : 🍐','🍊 : 🍒 : 🍒','🔔 : ?? : 🍇','🍌 : 🍒 : 🔔','🍐 : 🔔 : 🔔','🍊 : 🍋 : 🍒','🍋 : 🍋 : 🍌','🔔 : 🔔 : 🍇','🔔 : 🍐 : 🍇','🔔 : 🔔 : 🔔','🍒 : 🍒 : 🍒','🍌 : 🍌 : 🍌','🍇 : 🍇 : 🍇']
+                    const sotoy = ['🍊 : 🍒 : 🍐','🍒 : 🔔 : 🍊','🍇 : 🍒 : 🍐','🍊 : 🍋 : 🔔','🔔 : 🍒 : 🍐','🔔 : 🍒 : 🍊','🍊 : 🍋 : 🔔','🍐 : 🍒 : 🍋','🍐 : 🍐 : 🍐','🍊 : 🍒 : 🍒','🔔 : ?? : 🍇','🍌 : 🍒 : 🔔','🍐 : 🔔 : 🔔','🍊 : 🍋 : ??','🍋 : 🍋 : 🍌','🔔 : 🔔 : 🍇','🔔 : 🍐 : 🍇','🔔 : 🔔 : 🔔','🍒 : 🍒 : 🍒','🍌 : 🍌 : 🍌','🍇 : 🍇 : 🍇']
                     const somtoy = sotoy[Math.floor(Math.random() * (sotoy.length))]	
                     const somtoyy = sotoy[Math.floor(Math.random() * (sotoy.length))]	
                     const somtoyyy = sotoy[Math.floor(Math.random() * (sotoy.length))]	
@@ -5199,6 +5217,45 @@ _Harap tunggu sebentar, media akan segera dikirim_`
                     reply('Antilink grup nonaktif')
                 } else {
                     testqq(from, `antilink`)
+                }
+                break
+                case prefix+'antilinkwa':
+                if (!isGroup) return reply(mess.OnlyGrup)
+                if (!isGroupAdmins && !isOwner) return reply(mess.GrupAdmin)
+                if (!isBotGroupAdmins) return reply(mess.BotAdmin)
+                if (args.length === 1) return reply(`Pilih enable atau disable`)
+                if (args[1].toLowerCase() === 'enable'){
+                    if (isAntiWhatsappPrivate) return reply(`Udah aktif`)
+                    antichatwa.push(from)
+					fs.writeFileSync('./database/antiwame.json', JSON.stringify(antichatwa))
+					reply('Antilink wa aktif')
+                } else if (args[1].toLowerCase() === 'disable'){
+                    let anu = antichatwa.indexOf(from)
+                    antichatwa.splice(anu, 1)
+                    fs.writeFileSync('./database/antiwame.json', JSON.stringify(antichatwa))
+                    reply('Antilink wa nonaktif')
+                } else {
+                    testqq(from, `antilinkwa`)
+                }
+                break
+                case prefix+'antilinkyoutube':
+                case prefix+'antilinkyt':
+                if (!isGroup) return reply(mess.OnlyGrup)
+                if (!isGroupAdmins && !isOwner) return reply(mess.GrupAdmin)
+                if (!isBotGroupAdmins) return reply(mess.BotAdmin)
+                if (args.length === 1) return reply(`Pilih enable atau disable`)
+                if (args[1].toLowerCase() === 'enable'){
+                    if (isAntiYoutube) return reply(`Udah aktif`)
+                    antilinkyoutube.push(from)
+					fs.writeFileSync('./database/antiyoutube.json', JSON.stringify(antilinkyoutube))
+					reply('Anti Youtube grup aktif')
+                } else if (args[1].toLowerCase() === 'disable'){
+                    let anu = antilinkyoutube.indexOf(from)
+                    antilinkyoutube.splice(anu, 1)
+                    fs.writeFileSync('./database/antiyoutube.json', JSON.stringify(antilinkyoutube))
+                    reply('Anti Youtube grup nonaktif')
+                } else {
+                    testqq(from, `antilinkyoutube`)
                 }
                 break
             case prefix+'antiviewonce': case prefix+'antivo':
