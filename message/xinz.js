@@ -372,21 +372,21 @@ module.exports = async(xinz, msg, smsg, blocked, _afk, welcome) => {
             role = 'Exterminator'
         }
         // Anti link
-        if (isGroup && isAntiLink && !isOwner && !isGroupAdmins && isBotGroupAdmins){
-            if (chats.includes("https://wa.me/")) {
+        if (isGroup && isAntiLink && !isGroupAdmins && isBotGroupAdmins){
+            if (chats.match(/(https:\/\/chat.whatsapp.com)/gi)) {
                 reply(`*「 GROUP LINK DETECTOR 」*\n\nSepertinya kamu mengirimkan link grup, maaf kamu akan di kick`)
                 xinz.groupRemove(from, [sender])
             }
         }
         // Anti Link Youtube
         if (isGroup && isAntiYoutube && !isOwner && !isGroupAdmins && isBotGroupAdmins){
-            if (chats.includes("https://youtu.be")) {
+            if (chats.match(/(https:\/\/youtu)/gi)) {
                 reply(`*「 YOUTUBE LINK DETECTOR 」*\n\nSepertinya kamu mengirimkan link youtube, maaf kamu akan di kick`)
                 xinz.groupRemove(from, [sender])
             }
         }
         // Anti Link Private Chat
-        if (isGroup && isAntiWhatsappPrivate && !isOwner && !isGroupAdmins && isBotGroupAdmins){
+        if (isGroup && isAntiWhatsappPrivate && !isGroupAdmins && isBotGroupAdmins){
             if (chats.match(/(https:\/\/wa.me\/)/gi)) {
                 reply(`*「 PRIVATE  CHAT DETECTOR 」*\n\nSepertinya kamu mengirimkan link private chat, maaf kamu akan di kick`)
                 xinz.groupRemove(from, [sender])
