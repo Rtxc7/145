@@ -386,8 +386,8 @@ module.exports = async(xinz, msg, smsg, blocked, _afk, welcome) => {
             }
         }
         // Anti Link Private Chat
-        if (isGroup && isAntiWhatsappPrivate && !isGroupAdmins && isBotGroupAdmins){
-            if (chats.match(/(https:\/\/wa.me\/)/gi)) {
+        if (isGroup && isAntiWhatsappPrivate && !isOwner && !isGroupAdmins && isBotGroupAdmins){
+            if (chats.match(/(wa.me\/)/gi)) {
                 reply(`*「 PRIVATE  CHAT DETECTOR 」*\n\nSepertinya kamu mengirimkan link private chat, maaf kamu akan di kick`)
                 xinz.groupRemove(from, [sender])
             }
