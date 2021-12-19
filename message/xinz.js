@@ -373,14 +373,14 @@ module.exports = async(xinz, msg, smsg, blocked, _afk, welcome) => {
         }
         // Anti link
         if (isGroup && isAntiLink && !isOwner && !isGroupAdmins && isBotGroupAdmins){
-            if (chats.match(/(https:\/\/chat.whatsapp.com)/gi)) {
+            if (chats.includes("https://wa.me/")) {
                 reply(`*「 GROUP LINK DETECTOR 」*\n\nSepertinya kamu mengirimkan link grup, maaf kamu akan di kick`)
                 xinz.groupRemove(from, [sender])
             }
         }
         // Anti Link Youtube
         if (isGroup && isAntiYoutube && !isOwner && !isGroupAdmins && isBotGroupAdmins){
-            if (chats.match(/(https:\/\/youtu)/gi)) {
+            if (chats.includes("https://youtu.be")) {
                 reply(`*「 YOUTUBE LINK DETECTOR 」*\n\nSepertinya kamu mengirimkan link youtube, maaf kamu akan di kick`)
                 xinz.groupRemove(from, [sender])
             }
