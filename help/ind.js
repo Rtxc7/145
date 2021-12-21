@@ -749,6 +749,13 @@ usage: *${prefix}leveling enable/disable*
 
 37. ${prefix}antivirtex
 usage: *${prefix}antivirtex enable/disable*
+
+38. ${prefix}antilinkyt
+usage: *${prefix}antivirtex enable/disable*
+
+39. ${prefix}antilinkwa
+usage: *${prefix}antivirtex enable/disable*
+
    `
 }
 
