@@ -330,8 +330,6 @@ usage: *${prefix}delrespon text*
 13. ${prefix}join
 usage: *${prefix}join link_grup*
 
-14. ${prefix}storyanime
-usage: *-*
 `
 }
 
