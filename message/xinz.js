@@ -1524,7 +1524,7 @@ _Silahkan tunggu file media sedang dikirim mungkin butuh beberapa menit_`
                    let get_result = await fetchJson(`https://api.xteam.xyz/asupan/ptl?APIKEY=91e9b333684574e2`)
                    let get_resultt = get_result.result
                    let get_audio = await getBuffer(get_resultt.link)
-                    await xinz.sendMessage(from, get_audio, video, { mimetype: 'video/mp4', filename: `${get_resultt.username}.mp4`, quoted: msg, caption: "NIH ASUPAN" })
+                    xinz.sendMessage(from, get_audio, video, { mimetype: 'video/mp4', filename: `${get_resultt.username}.mp4`, quoted: msg, caption: "NIH ASUPAN" })
                     }
                     break
                     case prefix+"storyanime": // xteam
@@ -1532,7 +1532,7 @@ _Silahkan tunggu file media sedang dikirim mungkin butuh beberapa menit_`
                     let get_result = await fetchJson(`https://api.xteam.xyz/asupan/wibu?APIKEY=91e9b333684574e2`)
                     let get_resultt = get_result.result
                     let get_audio = await getBuffer(get_resultt.link)
-                    await xinz.sendMessage(from, get_audio, video, { mimetype: 'video/mp4', filename: `${get_resultt.username}.mp4`, quoted: fvn, caption: "NIH STORY ANIMENYA" })
+                    xinz.sendMessage(from, get_audio, video, { mimetype: 'video/mp4', filename: `${get_resultt.username}.mp4`, quoted: msg, caption: "NIH STORY ANIMENYA" })
                     break;
             case prefix+'pinterest': case prefix+'pinsearch': case prefix+'pinterestsearch':{
                 if (!isPremium) return reply(mess.OnlyPrem)
