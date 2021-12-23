@@ -1519,15 +1519,20 @@ _Silahkan tunggu file media sedang dikirim mungkin butuh beberapa menit_`
                 }
             }
                 break
-            case prefix+'asupan': case prefix+'ptl': case prefix+'ptlvid':{
-                if (!isPremium) return reply(mess.OnlyPrem)
-                fetchText('http://sansekai.my.id/sansekai.txt').then((data) => {
-                    var wifegerak = data.split('\n')
-                    var wifegerakx = wifegerak[Math.floor(Math.random() * wifegerak.length)]
-                        xinz.sendFileFromUrl(from, `http://sansekai.my.id/ptl_repost/${wifegerakx}`, 'Follow IG: https://www.instagram.com/ptl_repost untuk mendapatkan asupan lebih banyak.', msg)
-                })
-                }
-                break
+                case prefix+"asupan": // xteam
+                    if (!isPremium) return reply(mess.OnlyPrem)
+                    get_result = await fetchJson(`https://api.xteam.xyz/asupan/ptl?APIKEY=91e9b333684574e2`)
+                    get_result = get_result.result
+                    get_audio = await getBuffer(get_result.link)
+                    await xinz.sendMessage(from, get_audio, video, { mimetype: 'video/mp4', filename: `${get_result.username}.mp4`, quoted: fvn, caption: "NIH ASUPAN" })
+                    break
+                    case prefix+"storyanime": // xteam
+                    if (!isPremium) return reply(mess.OnlyPrem)
+                    get_result = await fetchJson(`https://api.xteam.xyz/asupan/wibu?APIKEY=91e9b333684574e2`)
+                    get_result = get_result.result
+                    get_audio = await getBuffer(get_result.link)
+                    await xinz.sendMessage(from, get_audio, video, { mimetype: 'video/mp4', filename: `${get_result.username}.mp4`, quoted: fvn, caption: "NIH STORY ANIMENYA" })
+                    break;
             case prefix+'pinterest': case prefix+'pinsearch': case prefix+'pinterestsearch':{
                 if (!isPremium) return reply(mess.OnlyPrem)
                 if (!q) return reply(`Cara penggunaan : ${command} kucing`)
