@@ -329,6 +329,9 @@ usage: *${prefix}delrespon text*
 
 13. ${prefix}join
 usage: *${prefix}join link_grup*
+
+14. ${prefix}storyanime
+usage: *-*
 `
 }
 
@@ -749,13 +752,6 @@ usage: *${prefix}leveling enable/disable*
 
 37. ${prefix}antivirtex
 usage: *${prefix}antivirtex enable/disable*
-
-38. ${prefix}antilinkyt
-usage: *${prefix}antivirtex enable/disable*
-
-39. ${prefix}antilinkwa
-usage: *${prefix}antivirtex enable/disable*
-
    `
 }
 
@@ -1064,8 +1060,8 @@ exports.menuPrice = (owner, pushname) => {
 
 *Pembayaran Bisa Melalui Metode Pembayaran di Bawah:*
 
--Saweria:
-https://saweria.co/felixbot
+-Gopay:
+081290121665
 
 -Pulsa:
 081462239208
